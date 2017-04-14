@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+from pysuricata import video_stream
+import argparse
+import cv2
+import json
+import os
+from shutil import copyfile
+
+
+parser = argparse.ArgumentParser(description='Validate a set of images into yes or no categories')
+parser.add_argument('--config', type=str, help='Json config file', required=True)
+
+args = parser.parse_args()
+
+print(args.config)
+
+with open(args.config) as data_file:
+    config_data = json.load(data_file)
+    v = video_stream.load_from_config(config_data["input_sequence"])
+
+    output_dir = config_data["output_folder"]
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+        if not os.path.exists(output_dir+"/yes"):
+            os.makedirs(output_dir+"/yes")
+        if not os.path.exists(output_dir+"/no"):
+            os.makedirs(output_dir+"/no")
+
+    while not v.has_ended():
+        img = v.get_next_frame()
+        cv2.imshow("frame", img)
+        key = 0
+        while key != 121 and key != 110:
+            key = int(cv2.waitKey(30)) & 255
+
+        onlyfilename = v.get_curr_filename()[v.get_curr_filename().rfind("/")+1:]
+        # this is yes
+        if key == 121:
+            # save on yes
+            copyfile(v.get_curr_filename(), output_dir+"/yes/"+onlyfilename)
+        elif key == 110:
+            # save on no
+            copyfile(v.get_curr_filename(), output_dir+"/no/"+onlyfilename)
