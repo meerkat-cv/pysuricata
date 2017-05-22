@@ -1,0 +1,6 @@
+{
+	"input_sequence": {
+ 		"image_dir": "frames/"
+	},
+	"output_folder": "out_dump/"
+}
