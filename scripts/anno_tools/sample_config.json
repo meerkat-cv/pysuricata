@@ -1,0 +1,7 @@
+{ 
+	"input_sequence": {
+		"image_dir": "/Users/gustavofuhr/meerkat/datasets/docs/checks/"
+	},
+	"output_folder": "/tmp/",
+	"labels": ["the_good", "the_bad", "and_the_ugly"]
+} 
