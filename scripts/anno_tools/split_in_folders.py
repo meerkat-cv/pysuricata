@@ -21,7 +21,7 @@ args = parser.parse_args()
 
 print(args.config)
 
-def scale_image(image, height = 1200):
+def scale_image(image, height = 1000):
     scale = height/image.shape[0]
     return cv2.resize(image, (0,0), fx=scale, fy=scale)
 

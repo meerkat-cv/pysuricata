@@ -1,7 +1,7 @@
 { 
 	"input_sequence": {
-		"image_dir": "/Users/gustavofuhr/meerkat/datasets/docs/checks/"
+		"image_dir": "/Users/gustavofuhr/.volume/data/rgs_ilegiveis_poc/"
 	},
-	"output_folder": "/tmp/",
-	"labels": ["the_good", "the_bad", "and_the_ugly"]
+	"output_folder": "/Users/gustavofuhr/.volume/data/",
+	"labels": ["ok", "flare", "occlusion", "blur", "dont_know"]
 } 
