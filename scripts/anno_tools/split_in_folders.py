@@ -9,13 +9,13 @@ import argparse
 import cv2
 import json
 import os
-from shutil import copyfile
+import shutil
 
 
 
 
 parser = argparse.ArgumentParser(description='Split the images (manually) into several folders.')
-parser.add_argument('--config', type=str, help='Json config file, should have a video_stream and also a list of labels', required=True)
+parser.add_argument('--config', default="sample_config.json", type=str, help='Json config file, should have a video_stream and also a list of labels')
 
 args = parser.parse_args()
 
@@ -60,6 +60,6 @@ with open(args.config) as data_file:
             key = cv2.waitKey(0)
             
         onlyfilename = v.get_curr_filename()[v.get_curr_filename().rfind("/")+1:]
-        copyfile(v.get_curr_filename(), os.path.join(output_dir,valid_keys[key],onlyfilename))
+        shutil.move(v.get_curr_filename(), os.path.join(output_dir,valid_keys[key],onlyfilename))
         
 
