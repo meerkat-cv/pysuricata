@@ -45,9 +45,12 @@ with open(args.config) as data_file:
     for lbl in labels:
         if not os.path.exists(os.path.join(output_dir, lbl)):
             os.makedirs(os.path.join(output_dir, lbl))
-        
+
     while not v.has_ended():
         img = v.get_next_frame()
+        if img is None :
+            continue
+
         img = scale_image(img)
         valid_keys = {}
         for i,lbl in enumerate(labels):
